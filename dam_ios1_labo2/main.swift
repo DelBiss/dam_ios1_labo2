@@ -8,7 +8,7 @@
 import Foundation
 
 func DebugPrint(_ output: Any) -> Void {
-    //print("Debug: ", output)
+    print("Debug: ", output)
 }
 
 func inputInt(_ prompt:String, min: Int=0, max: Int=0, defaultVal: Int = -1)->Int{
