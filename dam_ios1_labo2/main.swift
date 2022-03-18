@@ -26,13 +26,12 @@ func inputInt(_ prompt:String, min: Int=0, max: Int=0, defaultVal: Int = -1)->In
         strValide += " [défault: \(defaultVal)]"
     }
     
-    print("---------------------", separator:"\n")
+    
     while true {
         print(prompt,"\(strValide)",":",terminator: "")
         let res  = readLine()
         let input = Int(res ?? "") ?? Int(defaultVal)
         if (input >= min) && ((max<=0)||(input <= max)){
-            //print("---------------------")
             return input
         }
         print("-- ERREUR: La valeur entré n'est pas valide. Recommencé")
@@ -49,10 +48,12 @@ func partie( borneMin: Int = 1, borneMax : Int = 100, nbEssaie nbCoupsMax:Int = 
 Le chiffre mystère est entre \(borneMin) et \(borneMax).
 Vous avez \(nbCoupsMax) essaies pour le trouvé.
 Bonne Chance!
+--------------------------------------------------------
 """, separator:"\n")
     DebugPrint("DB 1: \(chiffreMystère)")
     
     for i in 1...nbCoupsMax{
+        
         let nb = inputInt("Essais #\(i) sur \(nbCoupsMax): Entrez un nombre",min:borneMin,max:borneMax)
         
         DebugPrint("DB 2: \(nb)")
@@ -63,19 +64,35 @@ Bonne Chance!
         // 3. Si on as passé les autres conditions, nous avons un autre essaie. Donnons un indice
         if nb == chiffreMystère {
             print("")
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            print("GAGNÉ")
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            print("""
+ $$$$$$\\
+$$  __$$\\
+$$ /  \\__| $$$$$$\\   $$$$$$\\  $$$$$$$\\   $$$$$$\\
+$$ |$$$$\\  \\____$$\\ $$  __$$\\ $$  __$$\\ $$  __$$\\
+$$ |\\_$$ | $$$$$$$ |$$ /  $$ |$$ |  $$ |$$$$$$$$ |
+$$ |  $$ |$$  __$$ |$$ |  $$ |$$ |  $$ |$$   ____|
+\\$$$$$$  |\\$$$$$$$ |\\$$$$$$$ |$$ |  $$ |\\$$$$$$$\\
+ \\______/  \\_______| \\____$$ |\\__|  \\__| \\_______|
+                    $$\\   $$ |
+                    \\$$$$$$  |
+                     \\______/
+""")
+                
             break
         } else if i == nbCoupsMax {
             print("")
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            print("PERDU")
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            print("""
+ _____             _
+|  __ \\           | |
+| |__) |__ _ __ __| |_   _
+|  ___/ _ \\ '__/ _` | | | |
+| |  |  __/ | | (_| | |_| |
+|_|   \\___|_|  \\__,_|\\__,_|
+""")
         } else if nb  < chiffreMystère {
-            print("^^^^^ Le nombre à deviner est plus grand. ^^^^^")
+            print("^^^^^ Le nombre à deviner est plus grand que \(nb). ^^^^^")
         } else {
-            print("vvvvv Le nombre à deviner est plus petit. vvvvv")
+            print("vvvvv Le nombre à deviner est plus petit que \(nb). vvvvv")
         }
         
     }
